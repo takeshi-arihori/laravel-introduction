@@ -40,3 +40,5 @@ Route::get('/', function () {
 
 // クエリー文字列を渡す
 Route::get('hello', [HelloController::class, 'index']);
+// フォームからの送信
+Route::post('hello', [HelloController::class, 'post']);

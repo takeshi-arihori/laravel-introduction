@@ -125,11 +125,39 @@ class HelloController extends Controller
     // }
 
     // blade.phpの利用
+    // public function index()
+    // {
+    //     $data = [
+    //         'msg' => 'これはBladeを利用したサンプルです。',
+    //     ];
+    //     return view('hello.index', $data);
+    // }
+
+    // formの利用
+    // public function index()
+    // {
+    //     return view('hello.index');
+    // }
+
+    // public function post(Request $request)
+    // {
+    //     return view('hello.index', ['msg' => $request->msg]);
+    // }
+
+    // foreach
+    // public function index()
+    // {
+    //     $data = [
+    //         ['name' => '山田太郎', 'mail' => 'taro@yamada'],
+    //         ['name' => '田中花子', 'mail' => 'hanako@tanaka'],
+    //         ['name' => '鈴木幸子', 'mail' => 'sachiko@happy']
+    //     ];
+    //     return view('hello.index', ['data' => $data]);
+    // }
+
+    // Service Provider
     public function index()
     {
-        $data = [
-            'msg' => 'これはBladeを利用したサンプルです。',
-        ];
-        return view('hello.index', $data);
+        return view('hello.index', ['message' => 'Hello!']);
     }
 }
