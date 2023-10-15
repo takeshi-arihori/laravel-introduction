@@ -68,7 +68,7 @@
             @endif
         @endforeach --}}
 
-        <h1>Blade/Index</h1>
+        {{-- <h1>Blade/Index</h1>
         <p>&#064;whileディレクティブの例</p>
         <ol>
             @php
@@ -80,8 +80,25 @@
                     $counter++;
                 @endphp
             @endwhile
-        </ol>
+        </ol> --}}
 
+        {{-- @sectionと@yieldを使用 --}}
+        @extends('layouts.helloapp')
+
+        @section('title', 'Index')
+        @section('menubar')
+            @parent
+            インデックスページ
+        @endsection
+
+        @section('content')
+            <p>ここが本文のコンテンツです。</p>
+            <p>必要なだけ記述できます。</p>
+        @endsection
+
+        @section('footer')
+            copylight 2020 arihori1987
+        @endsection
     </body>
 
 </html>
