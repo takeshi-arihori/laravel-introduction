@@ -41,7 +41,7 @@
 
 
         {{-- <h1>Blade/Index</h1>
-        <p>&#064;foreachディレクティブの例</p>
+        <p>&#064;forディレクティブの例</p>
         <ol>
             @for ($i = 1; $i < 100; $i++)
                 @if ($i % 2 == 1)
@@ -54,8 +54,8 @@
         @endfor
     </ol> --}}
 
-        <h1>Blade/Index</h1>
-        <p>&#064;foreachディレクティブの例</p>
+        {{-- <h1>Blade/Index</h1>
+        <p>&#064;forディレクティブの例</p>
         @foreach ($data as $item)
             @if ($loop->first)
                 <p>※データ一覧</p>
@@ -66,7 +66,21 @@
                 </ul>
                 <p>---ここまで</p>
             @endif
-        @endforeach
+        @endforeach --}}
+
+        <h1>Blade/Index</h1>
+        <p>&#064;whileディレクティブの例</p>
+        <ol>
+            @php
+                $counter = 0;
+            @endphp
+            @while ($counter < count($data))
+                <li>{{ $data[$counter] }}</li>
+                @php
+                    $counter++;
+                @endphp
+            @endwhile
+        </ol>
 
     </body>
 
