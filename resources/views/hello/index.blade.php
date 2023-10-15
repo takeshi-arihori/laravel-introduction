@@ -122,7 +122,7 @@
             <p>ViewComposer value<br>'view_message' = {{ $view_message }}</p> --}}
 
             {{-- Middleware --}}
-            <p>ここが本文のコンテンツです。</p>
+            {{-- <p>ここが本文のコンテンツです。</p>
             <table>
                 @foreach ($data as $item)
                     <tr>
@@ -130,7 +130,12 @@
                         <td>{{ $item['mail'] }}</td>
                     </tr>
                 @endforeach
-            </table>
+            </table> --}}
+
+            {{-- responseの操作 --}}
+            <p>ここが本文のコンテンツです。</p>
+            <p>これは、<middleware>google.com</middleware>へのリンクです。</p>
+            <p>これは、<middleware>yahoo.co.jp</middleware>へのリンクです。</p>
         @endsection
 
         @section('footer')
