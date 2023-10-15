@@ -92,8 +92,30 @@
         @endsection
 
         @section('content')
+            {{-- <p>ここが本文のコンテンツです。</p>
+            <p>必要なだけ記述できます。</p> --}}
+
+            {{-- component --}}
+            {{-- @component('components.message')
+                @slot('msg_title')
+                    CAUTION!
+                @endslot
+
+                @slot('msg_content')
+                    これはメッセージの表示です。
+                    @endslot
+                    @endcomponent
+                 --}}
+
+            {{-- include --}}
+            {{-- @include('components.message', ['msg_title' => 'OK', 'msg_content' => 'サブビューです。']) --}}
+
+            {{-- @each --}}
             <p>ここが本文のコンテンツです。</p>
-            <p>必要なだけ記述できます。</p>
+            <ul>
+                @each('components.item', $data, 'item')
+            </ul>
+
         @endsection
 
         @section('footer')
