@@ -145,13 +145,19 @@ class HelloController extends Controller
     // }
 
     // foreach
+    // public function index()
+    // {
+    //     $data = [
+    //         ['name' => '山田太郎', 'mail' => 'taro@yamada'],
+    //         ['name' => '田中花子', 'mail' => 'hanako@tanaka'],
+    //         ['name' => '鈴木幸子', 'mail' => 'sachiko@happy']
+    //     ];
+    //     return view('hello.index', ['data' => $data]);
+    // }
+
+    // Service Provider
     public function index()
     {
-        $data = [
-            ['name' => '山田太郎', 'mail' => 'taro@yamada'],
-            ['name' => '田中花子', 'mail' => 'hanako@tanaka'],
-            ['name' => '鈴木幸子', 'mail' => 'sachiko@happy']
-        ];
-        return view('hello.index', ['data' => $data]);
+        return view('hello.index', ['message' => 'Hello!']);
     }
 }

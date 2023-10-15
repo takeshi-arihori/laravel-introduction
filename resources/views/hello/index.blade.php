@@ -111,10 +111,15 @@
             {{-- @include('components.message', ['msg_title' => 'OK', 'msg_content' => 'サブビューです。']) --}}
 
             {{-- @each --}}
-            <p>ここが本文のコンテンツです。</p>
+            {{-- <p>ここが本文のコンテンツです。</p>
             <ul>
                 @each('components.item', $data, 'item')
-            </ul>
+            </ul> --}}
+
+            {{-- Service Provider View::composer --}}
+            <p>ここが本文のコンテンツです。</p>
+            <p>Controller value<br>'message' = {{ $message }}</p>
+            <p>ViewComposer value<br>'view_message' = {{ $view_message }}</p>
 
         @endsection
 
