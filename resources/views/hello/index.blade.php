@@ -18,7 +18,7 @@
     </head>
 
     <body>
-        <h1>Blade/Index</h1>
+        {{-- <h1>Blade/Index</h1>
         @isset($msg)
             <p>こんにちは、{{ $msg }}さん。</p>
         @else
@@ -28,7 +28,46 @@
             @csrf
             <input type="text" name="msg" />
             <input type="submit">
-        </form>
+        </form> --}}
+
+
+        {{-- <h1>Blade/Index</h1>
+        <p>&#064;foreachディレクティブの例</p>
+        <ol>
+            @foreach ($data as $item)
+                <li>{{ $item }}</li>
+            @endforeach
+        </ol> --}}
+
+
+        {{-- <h1>Blade/Index</h1>
+        <p>&#064;foreachディレクティブの例</p>
+        <ol>
+            @for ($i = 1; $i < 100; $i++)
+                @if ($i % 2 == 1)
+                    @continue
+                @elseif ($i <= 10)
+                    <li>No, {{ $i }}
+                    @else
+                    @break
+            @endif
+        @endfor
+    </ol> --}}
+
+        <h1>Blade/Index</h1>
+        <p>&#064;foreachディレクティブの例</p>
+        @foreach ($data as $item)
+            @if ($loop->first)
+                <p>※データ一覧</p>
+                <ul>
+            @endif
+            <li>No,{{ $loop->iteration }}. {{ $item }}</li>
+            @if ($loop->last)
+                </ul>
+                <p>---ここまで</p>
+            @endif
+        @endforeach
+
     </body>
 
 </html>
