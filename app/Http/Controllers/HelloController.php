@@ -156,8 +156,8 @@ class HelloController extends Controller
     // }
 
     // Service Provider
-    public function index()
+    public function index(Request $request)
     {
-        return view('hello.index', ['message' => 'Hello!']);
+        return view('hello.index', ['data' => $request->data]);
     }
 }

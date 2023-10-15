@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HelloController;
+use App\Http\Middleware\HelloMiddleware;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,3 +43,7 @@ Route::get('/', function () {
 Route::get('hello', [HelloController::class, 'index']);
 // フォームからの送信
 Route::post('hello', [HelloController::class, 'post']);
+
+// ミドルウェア
+Route::get('hello', [HelloController::class, 'index'])
+    ->middleware(HelloMiddleware::class);
