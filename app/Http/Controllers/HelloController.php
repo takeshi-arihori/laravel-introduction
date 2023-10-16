@@ -206,24 +206,55 @@ class HelloController extends Controller
         // }
 
         // バリデーション + エラーメッセージのカスタマイズ
+        // $rules = [
+        //     'name' => 'required',
+        //     'mail' => 'email',
+        //     'age' => 'numeric|between:0,150'
+        // ];
+        // $message = [
+        //     'name.required' => '名前は必ず入力してください。',
+        //     'mail.email' => 'メールアドレスが必要です。',
+        //     'age.numeric' => '年齢を整数で記入ください。',
+        //     'age.between' => '年齢は0~150の間で入力ください。',
+        // ];
+        // $validator = Validator::make($request->all(), $rules, $message);
+        // if ($validator->fails()) {
+        //     return redirect('/hello')
+        //         ->withErrors($validator)
+        //         ->withInput();
+        // }
+
+        // return view('hello.index', ['msg' => '正しく入力されました！']);
+
+
+        // 状況に応じてルールを追加する
         $rules = [
             'name' => 'required',
             'mail' => 'email',
-            'age' => 'numeric|between:0,150'
+            'age' => 'numeric',
         ];
         $message = [
             'name.required' => '名前は必ず入力してください。',
             'mail.email' => 'メールアドレスが必要です。',
             'age.numeric' => '年齢を整数で記入ください。',
-            'age.between' => '年齢は0~150の間で入力ください。',
+            'age.min' => '年齢はゼロ歳以上で記入ください。',
+            'age.max' => '年齢は200歳以下で記入ください。',
         ];
         $validator = Validator::make($request->all(), $rules, $message);
+
+        $validator->sometimes('age', 'min:0', function ($input) {
+            return !is_int($input->age);
+        });
+        $validator->sometimes('age', 'max:200', function ($input) {
+            return !is_int($input->age);
+        });
+
         if ($validator->fails()) {
             return redirect('/hello')
                 ->withErrors($validator)
                 ->withInput();
+        } else {
+            return view('hello.index', ['msg' => '正しく入力されました！']);
         }
-
-        return view('hello.index', ['msg' => '正しく入力されました！']);
     }
 }
