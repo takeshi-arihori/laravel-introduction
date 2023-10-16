@@ -194,11 +194,30 @@ class HelloController extends Controller
         // $this->validate($request, $validate_rule);
 
         // バリデーションのカスタマイズ
-        $validator = Validator::make($request->all(), [
+        // $validator = Validator::make($request->all(), [
+        //     'name' => 'required',
+        //     'mail' => 'email',
+        //     'age' => 'numeric|between:0,150'
+        // ]);
+        // if ($validator->fails()) {
+        //     return redirect('/hello')
+        //         ->withErrors($validator)
+        //         ->withInput();
+        // }
+
+        // バリデーション + エラーメッセージのカスタマイズ
+        $rules = [
             'name' => 'required',
             'mail' => 'email',
             'age' => 'numeric|between:0,150'
-        ]);
+        ];
+        $message = [
+            'name.required' => '名前は必ず入力してください。',
+            'mail.email' => 'メールアドレスが必要です。',
+            'age.numeric' => '年齢を整数で記入ください。',
+            'age.between' => '年齢は0~150の間で入力ください。',
+        ];
+        $validator = Validator::make($request->all(), $rules, $message);
         if ($validator->fails()) {
             return redirect('/hello')
                 ->withErrors($validator)
