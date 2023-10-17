@@ -7,6 +7,13 @@ use Illuminate\Contracts\Validation\ValidationRule;
 
 class Myrule implements ValidationRule
 {
+    protected $num; // プロパティの宣言を追加
+
+    public function __construct($n) // コンストラクタを追加
+    {
+        $this->num = $n;
+    }
+
     /**
      * Run the validation rule.
      *
@@ -14,6 +21,8 @@ class Myrule implements ValidationRule
      */
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
-        //
+        if ($value % $this->num !== 0) {
+            $fail('The validation error message.');
+        }
     }
 }

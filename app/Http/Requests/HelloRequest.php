@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Rules\Myrule;
 
 class HelloRequest extends FormRequest
 {
@@ -25,10 +26,19 @@ class HelloRequest extends FormRequest
      */
     public function rules(): array
     {
+        // return [
+        //     'name' => 'required',
+        //     'mail' => 'email',
+        //     'age' => 'numeric|hello', // HelloValidator.phpのvalidateHelloメソッドを呼び出す
+        // ];
+
         return [
             'name' => 'required',
             'mail' => 'email',
-            'age' => 'numeric|hello', // HelloValidator.phpのvalidateHelloメソッドを呼び出す
+            'age' => [
+                'numeric',
+                new Myrule(5), // Myrule.phpのvalidateメソッドを呼び出す(5の倍数のみ受け付ける)
+            ],
         ];
     }
 
