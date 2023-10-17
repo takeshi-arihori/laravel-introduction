@@ -6,26 +6,20 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Http\Requests\HelloRequest;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
 
 class HelloController extends Controller
 {
-    /**
-     * インデックスページを表示するメソッド。
-     * もしクッキーに'msg'が存在すれば、その値を表示します。
-     * 存在しない場合は、クッキーがない旨のメッセージを表示します。
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\View\View
-     */
     public function index(Request $request)
     {
-        // クッキーに'msg'が存在するかチェック
-        if ($request->hasCookie('msg')) {
-            $msg = 'Cookie: ' . $request->cookie('msg');
+        // パラメーター結合
+        if (isset($request->id)) {
+            $param = ['id' => $request->id];
+            $items = DB::select('select * from people where id = :id', $param);
         } else {
-            $msg = '※クッキーはありません。';
+            $items = DB::select('select * from people');
         }
-        return view('hello.index', ['msg' => $msg]);
+        return view('hello.index', ['items' => $items]);
     }
 
     /**
