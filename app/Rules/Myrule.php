@@ -22,7 +22,7 @@ class Myrule implements ValidationRule
     public function validate(string $attribute, mixed $value, Closure $fail): void
     {
         if ($value % $this->num !== 0) {
-            $fail('The validation error message.');
+            $fail($this->num . 'で割り切れる数値を入力してください。');
         }
     }
 }

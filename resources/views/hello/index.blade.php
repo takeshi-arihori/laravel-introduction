@@ -144,7 +144,7 @@
             @endif
             <form action="/hello" method="POST">
                 <table>
-                    @csrf
+                    {{-- @csrf --}}
                     @error('name')
                         <tr>
                             <th>ERROR</th>

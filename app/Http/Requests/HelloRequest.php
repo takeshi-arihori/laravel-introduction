@@ -37,7 +37,7 @@ class HelloRequest extends FormRequest
             'mail' => 'email',
             'age' => [
                 'numeric',
-                new Myrule(5), // Myrule.phpのvalidateメソッドを呼び出す(5の倍数のみ受け付ける)
+                new Myrule(3), // Myrule.phpのvalidateメソッドを呼び出す(5の倍数のみ受け付ける)
             ],
         ];
     }
