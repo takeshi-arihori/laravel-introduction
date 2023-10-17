@@ -47,6 +47,6 @@ Route::post('hello', [HelloController::class, 'post']);
 // ミドルウェア
 // 'hello'というURLにアクセスがあった場合、HelloControllerのindexメソッドを実行
 // その際、HelloMiddlewareミドルウェアを適用する
-Route::get('hello', [HelloController::class, 'index']);
+// Route::get('hello', [HelloController::class, 'index']);
     // ->middleware(HelloMiddleware::class);
     // ->middleware('helo');
