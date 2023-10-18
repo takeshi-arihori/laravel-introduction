@@ -58,8 +58,9 @@
         @endsection
 
         @section('footer')
-            copylight 2020 arihori1987
+            copylight 2023 Takeshi Arihori.
         @endsection
+
     </body>
 
 </html>
