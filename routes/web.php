@@ -62,3 +62,6 @@ Route::post('hello/edit', [HelloController::class, 'update']);
 // 削除
 Route::get('hello/del', [HelloController::class, 'del']);
 Route::post('hello/del', [HelloController::class, 'remove']);
+
+// 指定したIDのレコードを得る
+Route::get('hello/show', [HelloController::class, 'show']);
