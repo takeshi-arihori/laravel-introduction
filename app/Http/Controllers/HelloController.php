@@ -7,6 +7,7 @@ use Illuminate\Http\Response;
 use App\Http\Requests\HelloRequest;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 
 class HelloController extends Controller
 {
@@ -34,7 +35,8 @@ class HelloController extends Controller
             'mail' => $request->mail,
             'age'  => $request->age,
         ];
-        DB::insert('insert into people (name, mail, age) values (:name, :mail, :age)', $param);
+
+        DB::table('people')->insert($param);
         return redirect('/hello');
     }
 
