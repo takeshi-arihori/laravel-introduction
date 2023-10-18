@@ -6,48 +6,82 @@ use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Http\Requests\HelloRequest;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Redirect;
 
 class HelloController extends Controller
 {
-    /**
-     * インデックスページを表示するメソッド。
-     * もしクッキーに'msg'が存在すれば、その値を表示します。
-     * 存在しない場合は、クッキーがない旨のメッセージを表示します。
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\View\View
-     */
     public function index(Request $request)
     {
-        // クッキーに'msg'が存在するかチェック
-        if ($request->hasCookie('msg')) {
-            $msg = 'Cookie: ' . $request->cookie('msg');
-        } else {
-            $msg = '※クッキーはありません。';
-        }
-        return view('hello.index', ['msg' => $msg]);
+        $item = DB::table('people')->orderBy('age', 'asc')->get();
+        return view('hello.index', ['items' => $item]);
     }
 
-    /**
-     * リクエストから受け取ったメッセージをクッキーに保存するメソッド。
-     * 保存後、保存したメッセージを表示します。
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
     public function post(Request $request)
     {
-        // バリデーションルールの定義
-        $validate_rule = [
-            'msg' => 'required',
+        $items = DB::select('select * from people');
+        return view('hello.index', ['items' => $items]);
+    }
+
+    public function add(Request $request)
+    {
+        return view('hello.add');
+    }
+
+    public function create(Request $request)
+    {
+        $param = [
+            'name' => $request->name,
+            'mail' => $request->mail,
+            'age'  => $request->age,
         ];
-        // バリデーションの実行
-        $this->validate($request, $validate_rule);
-        $msg = $request->msg;
-        // メッセージを表示するためのレスポンスの作成
-        $response = response()->view('hello.index', ['msg' => '「' . $msg . '」をクッキーに保存しました。']);
-        // クッキーにメッセージを保存（有効期限は100分）
-        $response->cookie('msg', $msg, 100);
-        return $response;
+
+        DB::table('people')->insert($param);
+        return redirect('/hello');
+    }
+
+    public function edit(Request $request)
+    {
+        $item = DB::table('people')
+            ->where('id', $request->id)->first();
+        return view('hello.edit', ['form' => $item]);
+    }
+
+    public function update(Request $request)
+    {
+        $param = [
+            'id'   => $request->id,
+            'name' => $request->name,
+            'mail' => $request->mail,
+            'age'  => $request->age,
+        ];
+        DB::table('people')
+            ->where('id', $request->id)
+            ->update($param);
+        return redirect('/hello');
+    }
+
+    public function del(Request $request)
+    {
+        $item = DB::table('people')
+            ->where('id', $request->id)->first();
+        return view('hello.del', ['form' => $item]);
+    }
+
+    public function remove(Request $request)
+    {
+        DB::table('people')
+            ->where('id', $request->id)->delete();
+        return redirect('/hello');
+    }
+
+    public function show(Request $request)
+    {
+        $page = $request->page;
+        $items = DB::table('people')
+            ->offset($page * 3)
+            ->limit(3)
+            ->get();
+        return view('hello.show', ['items' => $items]);
     }
 }

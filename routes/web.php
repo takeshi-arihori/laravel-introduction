@@ -48,5 +48,20 @@ Route::post('hello', [HelloController::class, 'post']);
 // 'hello'というURLにアクセスがあった場合、HelloControllerのindexメソッドを実行
 // その際、HelloMiddlewareミドルウェアを適用する
 // Route::get('hello', [HelloController::class, 'index']);
-    // ->middleware(HelloMiddleware::class);
-    // ->middleware('helo');
+// ->middleware(HelloMiddleware::class);
+// ->middleware('helo');
+
+// 新規登録
+Route::get('hello/add', [HelloController::class, 'add']);
+Route::post('hello/add', [HelloController::class, 'create']);
+
+// 編集
+Route::get('hello/edit', [HelloController::class, 'edit']);
+Route::post('hello/edit', [HelloController::class, 'update']);
+
+// 削除
+Route::get('hello/del', [HelloController::class, 'del']);
+Route::post('hello/del', [HelloController::class, 'remove']);
+
+// 指定したIDのレコードを得る
+Route::get('hello/show', [HelloController::class, 'show']);
