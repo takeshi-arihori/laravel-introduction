@@ -71,3 +71,7 @@ Route::get('hello/show', [HelloController::class, 'show']);
 
 /* ================= Person =================== */
 Route::get('person', [PersonController::class, 'index']);
+
+// id検索
+Route::get('person/find', [PersonController::class, 'find']);
+Route::post('person/find', [PersonController::class, 'search']);
