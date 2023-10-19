@@ -25,5 +25,6 @@ class Person extends Model
     public function board()
     {
         return $this->hasOne('App\Models\Board');
+        // dd($this->hasOne('App\Models\Board'));
     }
 }
