@@ -9,31 +9,16 @@ use Illuminate\Database\Eloquent\Builder;
 
 class Person extends Model
 {
-    /**
-     * モデルの「起動」メソッド
-     */
-    protected static function booted(): void
-    {
-        static::addGlobalScope(new ScopePerson);
-    }
+    protected $guarded = array('id'); // 値を用意しておかない項目を指定する
 
-    public function getData(): string
+    public static $rules = array(
+        'name' => 'required',
+        'mail' => 'email',
+        'age' => 'integer|min:0|max:150'
+    );
+
+    public function getData()
     {
         return $this->id . ': ' . $this->name . ' (' . $this->age . ')';
-    }
-
-    public function scopeNameEqual($query, $str): Builder
-    {
-        return $query->where('name', $str);
-    }
-
-    public function scopeAgeGreaterThan($query, $n): Builder
-    {
-        return $query->where('age', '>=', $n);
-    }
-
-    public function scopeAgeLessThan($query, $n): Builder
-    {
-        return $query->where('age', '<=', $n);
     }
 }

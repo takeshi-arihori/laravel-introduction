@@ -75,3 +75,15 @@ Route::get('person', [PersonController::class, 'index']);
 // id検索
 Route::get('person/find', [PersonController::class, 'find']);
 Route::post('person/find', [PersonController::class, 'search']);
+
+// 新規登録
+Route::get('person/add', [PersonController::class, 'add']);
+Route::post('person/add', [PersonController::class, 'create']);
+
+// 更新
+Route::get('person/edit', [PersonController::class, 'edit']);
+Route::post('person/edit', [PersonController::class, 'update']);
+
+// 削除
+Route::get('person/del', [PersonController::class, 'del']);
+Route::post('person/del', [PersonController::class, 'remove']);
