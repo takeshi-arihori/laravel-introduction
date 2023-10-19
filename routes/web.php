@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HelloController;
 use App\Http\Middleware\HelloMiddleware;
+use App\Http\Controllers\PersonController;
 
 /*
 |--------------------------------------------------------------------------
@@ -65,3 +66,24 @@ Route::post('hello/del', [HelloController::class, 'remove']);
 
 // 指定したIDのレコードを得る
 Route::get('hello/show', [HelloController::class, 'show']);
+
+
+
+/* ================= Person =================== */
+Route::get('person', [PersonController::class, 'index']);
+
+// id検索
+Route::get('person/find', [PersonController::class, 'find']);
+Route::post('person/find', [PersonController::class, 'search']);
+
+// 新規登録
+Route::get('person/add', [PersonController::class, 'add']);
+Route::post('person/add', [PersonController::class, 'create']);
+
+// 更新
+Route::get('person/edit', [PersonController::class, 'edit']);
+Route::post('person/edit', [PersonController::class, 'update']);
+
+// 削除
+Route::get('person/del', [PersonController::class, 'del']);
+Route::post('person/del', [PersonController::class, 'remove']);
