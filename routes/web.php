@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HelloController;
 use App\Http\Middleware\HelloMiddleware;
 use App\Http\Controllers\PersonController;
+use App\Http\Controllers\BoardController;
 
 /*
 |--------------------------------------------------------------------------
@@ -87,3 +88,10 @@ Route::post('person/edit', [PersonController::class, 'update']);
 // 削除
 Route::get('person/del', [PersonController::class, 'del']);
 Route::post('person/del', [PersonController::class, 'remove']);
+
+
+/* ============== Board ============= */
+Route::get('board', [BoardController::class, 'index']);
+
+Route::get('board/add', [BoardController::class, 'add']);
+Route::post('board/add', [BoardController::class, 'create']);
