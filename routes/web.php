@@ -100,3 +100,5 @@ Route::post('board/add', [BoardController::class, 'create']);
 
 /* ============== Rest ============= */
 Route::resource('rest', RestappController::class);
+
+Route::get('hello/rest', [HelloController::class, 'rest']);
