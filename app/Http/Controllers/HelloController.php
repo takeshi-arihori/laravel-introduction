@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
 use App\Http\Requests\HelloRequest;
+use App\Models\Person;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Redirect;
@@ -13,13 +14,14 @@ class HelloController extends Controller
 {
     public function index(Request $request)
     {
-        $item = DB::table('people')->orderBy('age', 'asc')->get();
-        return view('hello.index', ['items' => $item]);
+        $items = DB::table('people')->simplePaginate(5);
+        return view('hello.index', ['items' => $items]);
     }
 
     public function post(Request $request)
     {
-        $items = DB::select('select * from people');
+        // $items = DB::select('select * from people');
+        $items = Person::simplePaginate(5); // Modelを使用する場合
         return view('hello.index', ['items' => $items]);
     }
 
@@ -87,5 +89,18 @@ class HelloController extends Controller
     public function rest(Request $request)
     {
         return view('hello.rest');
+    }
+
+    public function ses_get(Request $request)
+    {
+        $sesdata = $request->session()->get('msg');
+        return view('hello.session', ['session_data' => $sesdata]);
+    }
+
+    public function ses_put(Request $request)
+    {
+        $msg = $request->input;
+        $request->session()->put('msg', $msg);
+        return redirect('hello/session');
     }
 }
