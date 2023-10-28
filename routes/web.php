@@ -5,6 +5,8 @@ use App\Http\Controllers\HelloController;
 use App\Http\Middleware\HelloMiddleware;
 use App\Http\Controllers\PersonController;
 use App\Http\Controllers\BoardController;
+use App\Http\Controllers\RestappController;
+use App\Http\Controllers\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -42,9 +44,9 @@ Route::get('/', function () {
 // Route::get('hello/{id?}', [HelloController::class, 'index']);
 
 // クエリー文字列を渡す
-Route::get('hello', [HelloController::class, 'index']);
+// Route::get('hello', [HelloController::class, 'index']);
 // フォームからの送信
-Route::post('hello', [HelloController::class, 'post']);
+// Route::post('hello', [HelloController::class, 'post']);
 
 // ミドルウェア
 // 'hello'というURLにアクセスがあった場合、HelloControllerのindexメソッドを実行
@@ -95,3 +97,23 @@ Route::get('board', [BoardController::class, 'index']);
 
 Route::get('board/add', [BoardController::class, 'add']);
 Route::post('board/add', [BoardController::class, 'create']);
+
+
+/* ============== Rest ============= */
+Route::resource('rest', RestappController::class);
+
+Route::get('hello/rest', [HelloController::class, 'rest']);
+
+Route::get('hello/session', [HelloController::class, 'ses_get']);
+Route::post('hello/session', [HelloController::class, 'ses_put']);
+
+
+/* ============== Auth ============= */
+Auth::routes();
+
+Route::get('/home', [HomeController::class, 'index'])->name('home');
+
+Route::get('hello', [HelloController::class, 'index'])
+    ->middleware('auth');
+Route::get('hello/auth', [HelloController::class, 'getAuth']);
+Route::post('hello/auth', [HelloController::class, 'postAuth']);
